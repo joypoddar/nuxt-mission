@@ -20,6 +20,26 @@ export default {
     })
     return { planet }
   },
+  head() {
+    return {
+      title: this.planet.title,
+      titleTemplate: 'JamStack Explorers | %s', // %s is replaced by title
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: this.planet.description,
+        },
+      ],
+      link: [
+        {
+          hid: 'canonical',
+          rel: 'canonical',
+          href: `https://jamstack-explorers-nuxt-mission${this.$route.params}`,
+        },
+      ],
+    }
+  },
 }
 </script>
 
