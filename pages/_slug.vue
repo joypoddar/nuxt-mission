@@ -3,12 +3,14 @@
     <div>
       <img :src="planet.image" alt="" />
       <h1 class="title">{{ planet.title }}</h1>
+      <PlanetsList />
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  transition: 'bounce',
   async asyncData({ params }) {
     const planet = await fetch(
       `https://api.nuxtjs.dev/planets/${params.slug}`
@@ -23,7 +25,6 @@ export default {
   head() {
     return {
       title: this.planet.title,
-      titleTemplate: 'JamStack Explorers | %s', // %s is replaced by title
       meta: [
         {
           hid: 'description',
@@ -35,48 +36,20 @@ export default {
         {
           hid: 'canonical',
           rel: 'canonical',
-          href: `https://jamstack-explorers-nuxt-mission${this.$route.params}`,
+          href: `https://jamstack-explorers-nuxt-mission`,
         },
       ],
     }
   },
 }
 </script>
-
-<style>
+<style scoped>
+h1 {
+  font-family: Nunito, sans-serif;
+}
 img {
   height: 80px;
   width: auto;
   object-fit: cover;
-}
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
