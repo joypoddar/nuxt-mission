@@ -12,7 +12,12 @@ export default {
   async asyncData({ params }) {
     const planet = await fetch(
       `https://api.nuxtjs.dev/planets/${params.slug}`
-    ).then((res) => res.json())
+    ).then((res) => {
+      if (res.ok) {
+        return res.json()
+      }
+      throw new Error(res.status)
+    })
     return { planet }
   },
 }
